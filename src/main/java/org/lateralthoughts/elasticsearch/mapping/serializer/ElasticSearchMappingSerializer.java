@@ -1,11 +1,12 @@
-package org.lateralthoughs.elasticsearch.mapping.serializer;
+package org.lateralthoughts.elasticsearch.mapping.serializer;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.lateralthoughs.elasticsearch.mapping.domain.ElasticSearchMapping;
+import org.lateralthoughts.elasticsearch.mapping.domain.ElasticSearchMapping;
+
 
 import java.util.List;
 
@@ -46,6 +47,12 @@ public class ElasticSearchMappingSerializer {
         }
         if (element.getAnalyzer() != null) {
             node.put("index", element.getAnalyzer());
+        }
+        if (element.isOmittingNorm() != null) {
+            node.put("omit_norms", element.isOmittingNorm());
+        }
+        if (element.getIndexOptions() != null) {
+            node.put("index_options", element.getIndexOptions());
         }
         rootPropertiesNode.put(element.getFieldName(), node);
     }
